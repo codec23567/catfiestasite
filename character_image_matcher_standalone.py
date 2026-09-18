@@ -42,7 +42,7 @@ ID_PATTERN = re.compile(r"^\d+-\d+$")
 NUMBERED_PNG_PATTERN = re.compile(r"^(\d+)\.png$", re.IGNORECASE)
 
 # ============================================================
-# 매칭기 자체 설정 (character_image_matcher.py)
+# 매칭기 자체 설정
 # ============================================================
 NAMU_URLS = [
     "https://namu.wiki/w/%EB%8B%A4%EC%9D%B4%EB%84%88%EB%A7%88%EC%9D%B4%ED%8A%B8%20%EA%B5%B0%EB%8B%A8",
@@ -69,7 +69,7 @@ CHARACTER_ID_PATTERN = re.compile(r"^(\d+)-(\d+)$")
 
 
 # ============================================================
-# 텍스트 처리 (character_crawler.py)
+# 텍스트 처리
 # ============================================================
 def strip_tags(text):
     text = re.sub(r"<br\s*/?>", "\n", text, flags=re.IGNORECASE)
@@ -91,7 +91,7 @@ def is_namu_url(url):
 
 
 # ============================================================
-# 나무위키 HTML 크롤링 (character_crawler.py)
+# 나무위키 HTML 크롤링
 # ============================================================
 def crawl_html(url):
     print()
@@ -129,7 +129,7 @@ def crawl_html(url):
 
 
 # ============================================================
-# 목차 캐릭터 추출 (character_crawler.py)
+# 목차 캐릭터 추출
 # ============================================================
 def extract_toc_characters(source):
     characters = []
@@ -202,7 +202,7 @@ def extract_character_ids(source):
 
 
 # ============================================================
-# GitHub 이미지 목록 조회 (github_image_extractor.py)
+# GitHub 이미지 목록 조회
 # ============================================================
 def _auth_headers():
     headers = dict(HEADERS)
@@ -257,7 +257,7 @@ def list_repo_images(owner, repo, ref, path):
 
 
 # ============================================================
-# 나무위키 URL -> 시리즈 이름 (character_image_matcher.py)
+# 나무위키 URL -> 시리즈 이름
 # ============================================================
 def decode_series_name(url):
     path = urlparse(url).path
