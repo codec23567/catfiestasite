@@ -48,6 +48,11 @@ PAGES = [
 # (고축: 나무위키의 2.1.1 요수 가오 <-> 3.1.1 흑수 가오우 처럼 최상위 번호를 뺀 나머지가 같으면 짝)
 PAIRED_PAGES = {"cat_fiesta"}
 
+# 페이지별로 맨 뒤에 놓을 캐릭터 (소제목으로 나뉜 페이지는 각 묶음의 맨 뒤)
+MOVE_TO_END = {
+    "busters_fiesta": ["고양이 왕자"],
+}
+
 # ============================================================
 # 결과 읽기
 # ============================================================
@@ -377,8 +382,13 @@ def render_card(name, urls, indent="    "):
     )
 
 
-def render_characters(rows, paired=False):
+def render_characters(rows, paired=False, last=()):
     characters = group_characters(rows)
+
+    # last 에 적은 캐릭터는 (그 묶음 안에서) 맨 뒤로 보낸다. 적은 순서대로 뒤에 붙는다.
+    if last:
+        moved = [c for name in last for c in characters if c[0] == name]
+        characters = [c for c in characters if c[0] not in last] + moved
 
     if paired:
         pair_rows = pair_characters(characters)
@@ -402,8 +412,13 @@ def render_characters(rows, paired=False):
     return '  <div class="chars">\n' + "\n".join(cards) + "\n  </div>"
 
 
-def build_category(label, groups, series, paired=False):
+def build_category(label, groups, series, paired=False, last=()):
     sections = []
+
+    all_names = {row[0] for _, series_name in groups for row in series.get(series_name, [])}
+    for name in last:
+        if name not in all_names:
+            print(f"[경고] 맨 뒤로 보낼 캐릭터 '{name}' 이(가) {label} 결과에 없습니다")
 
     for subtitle, series_name in groups:
         rows = series.get(series_name, [])
@@ -413,7 +428,7 @@ def build_category(label, groups, series, paired=False):
             continue
 
         heading = f"  <h2>{esc(subtitle)}</h2>\n" if subtitle else ""
-        sections.append(heading + render_characters(rows, paired))
+        sections.append(heading + render_characters(rows, paired, last))
 
     if sections:
         main_class = ' class="wide"' if paired else ""
@@ -452,7 +467,11 @@ def main():
     for slug, label, groups in PAGES:
         write(
             f"categories/{slug}.html",
-            build_category(label, groups, series, paired=slug in PAIRED_PAGES),
+            build_category(
+                label, groups, series,
+                paired=slug in PAIRED_PAGES,
+                last=MOVE_TO_END.get(slug, ()),
+            ),
         )
 
     used = {name for _, _, groups in PAGES for _, name in groups}
