@@ -53,6 +53,16 @@ MOVE_TO_END = {
     "busters_fiesta": ["고양이 왕자"],
 }
 
+# 다른 페이지들의 '마지막 캐릭터'를 원래 페이지에서 빼서 한 페이지에 모은다 (MOVE_TO_END 적용 후 기준)
+# 레레: 다군 ~ 바스인축 각 페이지의 맨 마지막 캐릭터를 이 순서대로 모은다.
+COLLECT_LAST = {
+    "legend": [
+        "dynamites", "basarazu", "galaxy_girls", "dragon_emperors", "ultra_souls",
+        "dark_heroes", "gods", "iron_wars", "pixies", "girls_monsters",
+        "luga_family", "busters_fiesta",
+    ],
+}
+
 # ============================================================
 # 결과 읽기
 # ============================================================
@@ -382,14 +392,18 @@ def render_card(name, urls, indent="    "):
     )
 
 
-def render_characters(rows, paired=False, last=()):
+def order_characters(rows, last=()):
+    """묶음 안의 캐릭터 목록. last 에 적은 캐릭터는 맨 뒤로 보낸다(적은 순서대로 뒤에 붙는다)."""
     characters = group_characters(rows)
 
-    # last 에 적은 캐릭터는 (그 묶음 안에서) 맨 뒤로 보낸다. 적은 순서대로 뒤에 붙는다.
     if last:
         moved = [c for name in last for c in characters if c[0] == name]
         characters = [c for c in characters if c[0] not in last] + moved
 
+    return characters
+
+
+def render_characters(characters, paired=False):
     if paired:
         pair_rows = pair_characters(characters)
 
@@ -412,7 +426,8 @@ def render_characters(rows, paired=False, last=()):
     return '  <div class="chars">\n' + "\n".join(cards) + "\n  </div>"
 
 
-def build_category(label, groups, series, paired=False, last=()):
+def page_sections(label, groups, series, last=()):
+    """페이지 하나의 내용 -> [[소제목 또는 None, [캐릭터, ...]], ...]"""
     sections = []
 
     all_names = {row[0] for _, series_name in groups for row in series.get(series_name, [])}
@@ -427,12 +442,43 @@ def build_category(label, groups, series, paired=False, last=()):
             print(f"[경고] '{series_name}' 결과가 없습니다 ({label})")
             continue
 
-        heading = f"  <h2>{esc(subtitle)}</h2>\n" if subtitle else ""
-        sections.append(heading + render_characters(rows, paired, last))
+        sections.append([subtitle, order_characters(rows, last)])
 
+    return sections
+
+
+def collect_last(pages):
+    """
+    COLLECT_LAST 설정대로, 원본 페이지들의 마지막 캐릭터를 뽑아서(원본에서는 제거)
+    대상 페이지의 내용으로 만든다.  pages: {slug: sections}
+    """
+    labels = {slug: label for slug, label, _ in PAGES}
+
+    for target, sources in COLLECT_LAST.items():
+        collected = []
+
+        for slug in sources:
+            sections = pages.get(slug)
+
+            if not sections or not sections[-1][1]:
+                print(f"[경고] {labels[slug]} 에서 옮길 마지막 캐릭터가 없습니다")
+                continue
+
+            collected.append(sections[-1][1].pop())
+
+        pages[target] = [[None, collected]] if collected else []
+
+
+def build_category(label, sections, paired=False):
     if sections:
+        parts = []
+
+        for subtitle, characters in sections:
+            heading = f"  <h2>{esc(subtitle)}</h2>\n" if subtitle else ""
+            parts.append(heading + render_characters(characters, paired))
+
         main_class = ' class="wide"' if paired else ""
-        main = f'<main{main_class}>\n' + "\n\n".join(sections) + "\n</main>"
+        main = f'<main{main_class}>\n' + "\n\n".join(parts) + "\n</main>"
     else:
         main = f"""<main class="empty">
   <p>"{esc(label)}" 카테고리 목록이 여기에 들어갈 예정입니다.</p>
@@ -464,14 +510,16 @@ def main():
 
     write("index.html", build_index())
 
-    for slug, label, groups in PAGES:
+    pages = {
+        slug: page_sections(label, groups, series, MOVE_TO_END.get(slug, ()))
+        for slug, label, groups in PAGES
+    }
+    collect_last(pages)
+
+    for slug, label, _groups in PAGES:
         write(
             f"categories/{slug}.html",
-            build_category(
-                label, groups, series,
-                paired=slug in PAIRED_PAGES,
-                last=MOVE_TO_END.get(slug, ()),
-            ),
+            build_category(label, pages[slug], paired=slug in PAIRED_PAGES),
         )
 
     used = {name for _, _, groups in PAGES for _, name in groups}
