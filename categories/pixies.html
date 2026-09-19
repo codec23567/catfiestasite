@@ -37,14 +37,57 @@
     color: #cfd2e0;
   }
   main {
-    max-width: 700px;
+    max-width: 900px;
     margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+  main.empty {
+    max-width: 700px;
     padding: 40px 20px;
     text-align: center;
   }
   main p {
     color: #9a9db0;
     line-height: 1.6;
+  }
+  h2 {
+    margin: 32px 0 12px;
+    font-size: 1.1rem;
+    color: #cfd2e0;
+    border-bottom: 1px solid #2a2d36;
+    padding-bottom: 6px;
+  }
+  h2:first-child {
+    margin-top: 0;
+  }
+  .chars {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .card {
+    background: #1a1d24;
+    border: 1px solid #2a2d36;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+  .card .name {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #eaeaf0;
+    margin-bottom: 8px;
+    word-break: keep-all;
+  }
+  .forms {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px;
+  }
+  .forms img {
+    width: 64px;
+    height: auto;
   }
 </style>
 </head>
@@ -56,8 +99,90 @@
 </header>
 
 <main>
-  <p>"픽시즈" 카테고리 목록이 여기에 들어갈 예정입니다.</p>
-  <p>(내용 준비 중)</p>
+  <div class="chars">
+    <div class="card">
+      <div class="name">불의 정령 메라라</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/359/0.png" alt="불의 정령 메라라" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/359/1.png" alt="불의 정령 메라라" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/359/2.png" alt="불의 정령 메라라" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/359/3.png" alt="불의 정령 메라라" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">물의 정령 마리</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/360/0.png" alt="물의 정령 마리" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/360/1.png" alt="물의 정령 마리" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/360/2.png" alt="물의 정령 마리" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/360/3.png" alt="물의 정령 마리" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">바람의 정령 에어리</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/361/0.png" alt="바람의 정령 에어리" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/361/1.png" alt="바람의 정령 에어리" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/361/2.png" alt="바람의 정령 에어리" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/361/3.png" alt="바람의 정령 에어리" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">번개의 정령 볼트</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/401/0.png" alt="번개의 정령 볼트" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/401/1.png" alt="번개의 정령 볼트" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/401/2.png" alt="번개의 정령 볼트" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">돌의 정령 롤링스톤</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/569/0.png" alt="돌의 정령 롤링스톤" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/569/1.png" alt="돌의 정령 롤링스톤" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/569/2.png" alt="돌의 정령 롤링스톤" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">어둠의 정령 야미</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/631/0.png" alt="어둠의 정령 야미" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/631/1.png" alt="어둠의 정령 야미" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/631/2.png" alt="어둠의 정령 야미" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">얼음의 정령 블리즈</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/655/0.png" alt="얼음의 정령 블리즈" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/655/1.png" alt="얼음의 정령 블리즈" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/655/2.png" alt="얼음의 정령 블리즈" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">철의 정령 메탈릭</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/719/0.png" alt="철의 정령 메탈릭" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/719/1.png" alt="철의 정령 메탈릭" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/719/2.png" alt="철의 정령 메탈릭" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">나무의 정령 모리</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/817/0.png" alt="나무의 정령 모리" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/817/1.png" alt="나무의 정령 모리" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/818/0.png" alt="나무의 정령 모리" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">환상의 정령 루미나</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/478/0.png" alt="환상의 정령 루미나" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/478/1.png" alt="환상의 정령 루미나" loading="lazy">
+      </div>
+    </div>
+  </div>
 </main>
 
 </body>

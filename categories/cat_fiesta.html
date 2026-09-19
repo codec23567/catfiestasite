@@ -37,14 +37,57 @@
     color: #cfd2e0;
   }
   main {
-    max-width: 700px;
+    max-width: 900px;
     margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+  main.empty {
+    max-width: 700px;
     padding: 40px 20px;
     text-align: center;
   }
   main p {
     color: #9a9db0;
     line-height: 1.6;
+  }
+  h2 {
+    margin: 32px 0 12px;
+    font-size: 1.1rem;
+    color: #cfd2e0;
+    border-bottom: 1px solid #2a2d36;
+    padding-bottom: 6px;
+  }
+  h2:first-child {
+    margin-top: 0;
+  }
+  .chars {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .card {
+    background: #1a1d24;
+    border: 1px solid #2a2d36;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+  .card .name {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #eaeaf0;
+    margin-bottom: 8px;
+    word-break: keep-all;
+  }
+  .forms {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px;
+  }
+  .forms img {
+    width: 64px;
+    height: auto;
   }
 </style>
 </head>
@@ -56,16 +99,153 @@
 </header>
 
 <main>
-  <p>"고축" 카테고리 목록이 여기에 들어갈 예정입니다.</p>
-  <p>(내용 준비 중)</p>
-
-  <img src="https://i.namu.wiki/i/uk6sbw-ZpikBHfrZDde-6M84cCVABklT8x3jw0Q5lcdF-MAiC7fwIFIlRQnYPP1hUuBW4H3SSsb20yn5CzgFbA.webp">
-
-  <img src="https://i.namu.wiki/i/11_ZjNyxpsdWixeiL6Ov7CDbgZdDhFI741zOUTLaTwLG-zfuVIhwGW_hh9nf5V5h6oDcdP1tQulz0NWDgjD7cg.webp">
-  <img src="https://i.namu.wiki/i/fIUfBgPbLCgJco5iOPv-bf6mmiMIyW_pYEGAwth73XiWqHMtexfhmASSpVJsGHDTFr_dhVz2CtNWp_coUuXnAA.webp">
-  <img src="https://i.namu.wiki/i/xq3nQ9-l-7Ao62spcMTlGuERiChqoeIX_fQGSM8jld6g8tLmFfhmuOO4xW0876-QgI5lhEjYTaAu8EaiPR8C_g.webp">
-  <img src="https://i.namu.wiki/i/K6PULgmkJdLzC2pAyZRDjZP-yhuIlofGLqJIm62BxqNMLVQ5XCFTrQLB1CbLS0X2Rl5gzKzztfr9MCkOvAvCIw.webp">
-
+  <div class="chars">
+    <div class="card">
+      <div class="name">요수 가오</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/269/0.png" alt="요수 가오" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/269/1.png" alt="요수 가오" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">무녀공주 미타마</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/318/0.png" alt="무녀공주 미타마" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/318/1.png" alt="무녀공주 미타마" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">쾌걸 달타냥</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/380/0.png" alt="쾌걸 달타냥" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/380/1.png" alt="쾌걸 달타냥" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">재앙의 캐슬리</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/529/0.png" alt="재앙의 캐슬리" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/529/1.png" alt="재앙의 캐슬리" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">요수 가루</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/585/0.png" alt="요수 가루" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/585/1.png" alt="요수 가루" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">무희 이즈</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/641/0.png" alt="무희 이즈" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/641/1.png" alt="무희 이즈" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">운명의 아이 포노</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/690/0.png" alt="운명의 아이 포노" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/690/1.png" alt="운명의 아이 포노" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">꼬마선녀 루나</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/779/0.png" alt="꼬마선녀 루나" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/779/1.png" alt="꼬마선녀 루나" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">꼬마기사 루노</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/837/0.png" alt="꼬마기사 루노" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/838/0.png" alt="꼬마기사 루노" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/837/1.png" alt="꼬마기사 루노" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/839/0.png" alt="꼬마기사 루노" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">새벽의 이자나기</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/731/0.png" alt="새벽의 이자나기" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/731/1.png" alt="새벽의 이자나기" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/732/0.png" alt="새벽의 이자나기" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">흑수 가오우</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/333/0.png" alt="흑수 가오우" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/333/1.png" alt="흑수 가오우" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">칠흑의 미타마</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/378/0.png" alt="칠흑의 미타마" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/378/1.png" alt="칠흑의 미타마" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">호걸 달타냥</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/441/0.png" alt="호걸 달타냥" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/441/1.png" alt="호걸 달타냥" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">화근의 마녀 캐슬리</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/543/0.png" alt="화근의 마녀 캐슬리" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/543/1.png" alt="화근의 마녀 캐슬리" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">흑수 가르디언</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/609/0.png" alt="흑수 가르디언" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/609/1.png" alt="흑수 가르디언" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">비탄의 무희 이즈</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/657/0.png" alt="비탄의 무희 이즈" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/657/1.png" alt="비탄의 무희 이즈" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">비명의 왕 포노아</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/705/0.png" alt="비명의 왕 포노아" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/705/1.png" alt="비명의 왕 포노아" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">비호의 선녀 루나샤</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/787/0.png" alt="비호의 선녀 루나샤" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/787/1.png" alt="비호의 선녀 루나샤" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">고월의 기사 루노스</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/859/0.png" alt="고월의 기사 루노스" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/859/1.png" alt="고월의 기사 루노스" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/860/0.png" alt="고월의 기사 루노스" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">해질녘의 이자나미</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/738/0.png" alt="해질녘의 이자나미" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/738/1.png" alt="해질녘의 이자나미" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/739/0.png" alt="해질녘의 이자나미" loading="lazy">
+      </div>
+    </div>
+  </div>
 </main>
 
 </body>

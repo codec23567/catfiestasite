@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>etc - catfiesta</title>
+<title>레레 - catfiesta</title>
 <style>
   body {
     margin: 0;
@@ -37,8 +37,12 @@
     color: #cfd2e0;
   }
   main {
-    max-width: 700px;
+    max-width: 900px;
     margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+  main.empty {
+    max-width: 700px;
     padding: 40px 20px;
     text-align: center;
   }
@@ -46,17 +50,56 @@
     color: #9a9db0;
     line-height: 1.6;
   }
+  h2 {
+    margin: 32px 0 12px;
+    font-size: 1.1rem;
+    color: #cfd2e0;
+    border-bottom: 1px solid #2a2d36;
+    padding-bottom: 6px;
+  }
+  h2:first-child {
+    margin-top: 0;
+  }
+  .chars {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .card {
+    background: #1a1d24;
+    border: 1px solid #2a2d36;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+  .card .name {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #eaeaf0;
+    margin-bottom: 8px;
+    word-break: keep-all;
+  }
+  .forms {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px;
+  }
+  .forms img {
+    width: 64px;
+    height: auto;
+  }
 </style>
 </head>
 <body>
 
 <header>
   <a class="home-btn" href="../index.html">◀ catfiesta</a>
-  <h1>etc</h1>
+  <h1>레레</h1>
 </header>
 
-<main>
-  <p>"etc" 카테고리 목록이 여기에 들어갈 예정입니다.</p>
+<main class="empty">
+  <p>"레레" 카테고리 목록이 여기에 들어갈 예정입니다.</p>
   <p>(내용 준비 중)</p>
 </main>
 

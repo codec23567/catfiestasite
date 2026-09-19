@@ -37,14 +37,57 @@
     color: #cfd2e0;
   }
   main {
-    max-width: 700px;
+    max-width: 900px;
     margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+  main.empty {
+    max-width: 700px;
     padding: 40px 20px;
     text-align: center;
   }
   main p {
     color: #9a9db0;
     line-height: 1.6;
+  }
+  h2 {
+    margin: 32px 0 12px;
+    font-size: 1.1rem;
+    color: #cfd2e0;
+    border-bottom: 1px solid #2a2d36;
+    padding-bottom: 6px;
+  }
+  h2:first-child {
+    margin-top: 0;
+  }
+  .chars {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .card {
+    background: #1a1d24;
+    border: 1px solid #2a2d36;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+  .card .name {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #eaeaf0;
+    margin-bottom: 8px;
+    word-break: keep-all;
+  }
+  .forms {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px;
+  }
+  .forms img {
+    width: 64px;
+    height: auto;
   }
 </style>
 </head>
@@ -56,8 +99,87 @@
 </header>
 
 <main>
-  <p>"걸몬" 카테고리 목록이 여기에 들어갈 예정입니다.</p>
-  <p>(내용 준비 중)</p>
+  <div class="chars">
+    <div class="card">
+      <div class="name">여우아가씨 하늘나리</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/334/0.png" alt="여우아가씨 하늘나리" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/334/1.png" alt="여우아가씨 하늘나리" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/334/2.png" alt="여우아가씨 하늘나리" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">인어아가씨 루리</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/335/0.png" alt="인어아가씨 루리" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/335/1.png" alt="인어아가씨 루리" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/335/2.png" alt="인어아가씨 루리" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">미라아가씨 레이카</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/336/0.png" alt="미라아가씨 레이카" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/336/1.png" alt="미라아가씨 레이카" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/336/2.png" alt="미라아가씨 레이카" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">늑대아가씨 딜</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/357/0.png" alt="늑대아가씨 딜" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/357/1.png" alt="늑대아가씨 딜" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/357/2.png" alt="늑대아가씨 딜" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">좀비아가씨 버베나</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/358/0.png" alt="좀비아가씨 버베나" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/358/1.png" alt="좀비아가씨 버베나" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/358/2.png" alt="좀비아가씨 버베나" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">모험가 칸나</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/607/0.png" alt="모험가 칸나" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/607/1.png" alt="모험가 칸나" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/607/2.png" alt="모험가 칸나" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">여신 베가</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/682/0.png" alt="여신 베가" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/682/1.png" alt="여신 베가" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/682/2.png" alt="여신 베가" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">닌자아가씨 토모에</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/725/0.png" alt="닌자아가씨 토모에" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/725/1.png" alt="닌자아가씨 토모에" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/725/2.png" alt="닌자아가씨 토모에" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">마도사 시드미</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/824/0.png" alt="마도사 시드미" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/824/1.png" alt="마도사 시드미" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/825/0.png" alt="마도사 시드미" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">나나호</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/544/0.png" alt="나나호" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/544/1.png" alt="나나호" loading="lazy">
+      </div>
+    </div>
+  </div>
 </main>
 
 </body>

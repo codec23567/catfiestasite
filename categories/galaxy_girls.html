@@ -37,14 +37,57 @@
     color: #cfd2e0;
   }
   main {
-    max-width: 700px;
+    max-width: 900px;
     margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+  main.empty {
+    max-width: 700px;
     padding: 40px 20px;
     text-align: center;
   }
   main p {
     color: #9a9db0;
     line-height: 1.6;
+  }
+  h2 {
+    margin: 32px 0 12px;
+    font-size: 1.1rem;
+    color: #cfd2e0;
+    border-bottom: 1px solid #2a2d36;
+    padding-bottom: 6px;
+  }
+  h2:first-child {
+    margin-top: 0;
+  }
+  .chars {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .card {
+    background: #1a1d24;
+    border: 1px solid #2a2d36;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+  .card .name {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #eaeaf0;
+    margin-bottom: 8px;
+    word-break: keep-all;
+  }
+  .forms {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px;
+  }
+  .forms img {
+    width: 64px;
+    height: auto;
   }
 </style>
 </head>
@@ -56,8 +99,115 @@
 </header>
 
 <main>
-  <p>"갤걸" 카테고리 목록이 여기에 들어갈 예정입니다.</p>
-  <p>(내용 준비 중)</p>
+  <div class="chars">
+    <div class="card">
+      <div class="name">바람의 신・윈디</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/75/0.png" alt="바람의 신・윈디" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/75/1.png" alt="바람의 신・윈디" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/75/2.png" alt="바람의 신・윈디" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/75/3.png" alt="바람의 신・윈디" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">번개의 신・산디아</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/76/0.png" alt="번개의 신・산디아" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/76/1.png" alt="번개의 신・산디아" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/76/2.png" alt="번개의 신・산디아" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/76/3.png" alt="번개의 신・산디아" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">쿠우</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/105/0.png" alt="쿠우" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/105/1.png" alt="쿠우" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/105/2.png" alt="쿠우" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">카이</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/106/0.png" alt="카이" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/106/1.png" alt="카이" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/106/2.png" alt="카이" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">갓파 마인</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/107/0.png" alt="갓파 마인" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/107/1.png" alt="갓파 마인" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/107/2.png" alt="갓파 마인" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">명계의 칼리파</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/159/0.png" alt="명계의 칼리파" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/159/1.png" alt="명계의 칼리파" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/159/2.png" alt="명계의 칼리파" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">시시루와 코마리</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/351/0.png" alt="시시루와 코마리" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/351/1.png" alt="시시루와 코마리" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/351/2.png" alt="시시루와 코마리" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">멜슈</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/502/0.png" alt="멜슈" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/502/1.png" alt="멜슈" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/502/2.png" alt="멜슈" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">리린</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/619/0.png" alt="리린" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/619/1.png" alt="리린" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/619/2.png" alt="리린" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">테룬</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/647/0.png" alt="테룬" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/647/1.png" alt="테룬" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/647/2.png" alt="테룬" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">페가사</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/733/0.png" alt="페가사" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/733/1.png" alt="페가사" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/734/0.png" alt="페가사" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/733/2.png" alt="페가사" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/875/0.png" alt="페가사" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">라클레스</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/830/0.png" alt="라클레스" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/830/1.png" alt="라클레스" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">잔다르크</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/449/0.png" alt="잔다르크" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/449/1.png" alt="잔다르크" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/449/2.png" alt="잔다르크" loading="lazy">
+      </div>
+    </div>
+  </div>
 </main>
 
 </body>

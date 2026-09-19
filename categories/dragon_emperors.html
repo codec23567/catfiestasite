@@ -37,14 +37,57 @@
     color: #cfd2e0;
   }
   main {
-    max-width: 700px;
+    max-width: 900px;
     margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+  main.empty {
+    max-width: 700px;
     padding: 40px 20px;
     text-align: center;
   }
   main p {
     color: #9a9db0;
     line-height: 1.6;
+  }
+  h2 {
+    margin: 32px 0 12px;
+    font-size: 1.1rem;
+    color: #cfd2e0;
+    border-bottom: 1px solid #2a2d36;
+    padding-bottom: 6px;
+  }
+  h2:first-child {
+    margin-top: 0;
+  }
+  .chars {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .card {
+    background: #1a1d24;
+    border: 1px solid #2a2d36;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+  .card .name {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #eaeaf0;
+    margin-bottom: 8px;
+    word-break: keep-all;
+  }
+  .forms {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px;
+  }
+  .forms img {
+    width: 64px;
+    height: auto;
   }
 </style>
 </head>
@@ -56,8 +99,112 @@
 </header>
 
 <main>
-  <p>"드엠" 카테고리 목록이 여기에 들어갈 예정입니다.</p>
-  <p>(내용 준비 중)</p>
+  <div class="chars">
+    <div class="card">
+      <div class="name">성룡 메기도라</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/84/0.png" alt="성룡 메기도라" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/84/1.png" alt="성룡 메기도라" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/84/2.png" alt="성룡 메기도라" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">지룡 소돔</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/83/0.png" alt="지룡 소돔" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/83/1.png" alt="지룡 소돔" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/83/2.png" alt="지룡 소돔" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">용기사 바르스</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/85/0.png" alt="용기사 바르스" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/85/1.png" alt="용기사 바르스" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/85/2.png" alt="용기사 바르스" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">신룡 카무쿠라</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/86/0.png" alt="신룡 카무쿠라" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/86/1.png" alt="신룡 카무쿠라" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/86/2.png" alt="신룡 카무쿠라" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">용병기 라이덴</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/87/0.png" alt="용병기 라이덴" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/87/1.png" alt="용병기 라이덴" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/87/2.png" alt="용병기 라이덴" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">패룡 디오라무스</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/177/0.png" alt="패룡 디오라무스" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/177/1.png" alt="패룡 디오라무스" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/177/2.png" alt="패룡 디오라무스" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/177/3.png" alt="패룡 디오라무스" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">고룡 강글리온</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/396/0.png" alt="고룡 강글리온" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/396/1.png" alt="고룡 강글리온" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/396/2.png" alt="고룡 강글리온" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">각룡 그라디오스</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/505/0.png" alt="각룡 그라디오스" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/505/1.png" alt="각룡 그라디오스" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/505/2.png" alt="각룡 그라디오스" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">사룡 헤비저크</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/620/0.png" alt="사룡 헤비저크" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/620/1.png" alt="사룡 헤비저크" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/620/2.png" alt="사룡 헤비저크" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">해룡 다라이어던</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/660/0.png" alt="해룡 다라이어던" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/660/1.png" alt="해룡 다라이어던" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/660/2.png" alt="해룡 다라이어던" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">포룡 건듀로스</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/760/0.png" alt="포룡 건듀로스" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/760/1.png" alt="포룡 건듀로스" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/761/0.png" alt="포룡 건듀로스" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">폭룡기 볼네이도</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/861/0.png" alt="폭룡기 볼네이도" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/861/1.png" alt="폭룡기 볼네이도" loading="lazy">
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">천성용 바벨</div>
+      <div class="forms">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/450/0.png" alt="천성용 바벨" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/450/1.png" alt="천성용 바벨" loading="lazy">
+        <img src="https://raw.githubusercontent.com/shadowgao42/nyankodb/main/img/u/450/2.png" alt="천성용 바벨" loading="lazy">
+      </div>
+    </div>
+  </div>
 </main>
 
 </body>
