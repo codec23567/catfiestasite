@@ -256,10 +256,23 @@ def extract_character_ids(source):
         # 같은 캐릭터 영역에서 동일 ID가 반복되는 경우 제거
         seen_ids = set()
 
+        # 첫 번째 ID의 유닛번호와 유닛번호가 다른 ID는 버린다.
+        # 예: 페가사 734-1, 734-2, 735-1, 734-3, 876-1 -> 734-1, 734-2, 734-3
+        first_unit = None
+
         for link in links:
             key = (link["id"], link["url"])
 
             if key in seen_ids:
+                continue
+
+            unit = link["id"].split("-")[0]
+
+            if first_unit is None:
+                first_unit = unit
+            elif unit != first_unit:
+                print(f"[제외] {section}. {name} : {link['id']} "
+                      f"(첫 ID의 유닛번호 {first_unit} 와 다름)")
                 continue
 
             seen_ids.add(key)

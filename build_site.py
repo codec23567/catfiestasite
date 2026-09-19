@@ -320,20 +320,42 @@ def build_index():
     return page("catfiesta", INDEX_CSS, body)
 
 
+ID_PATTERN = re.compile(r"(\d+)-(\d+)")
+
+
+def id_key(char_id):
+    """ID "734-3" -> (734, 3). 읽을 수 없는 ID는 맨 뒤로 보낸다."""
+    match = ID_PATTERN.fullmatch(char_id.strip())
+
+    if not match:
+        return (float("inf"), 0)
+
+    return (int(match.group(1)), int(match.group(2)))
+
+
 def group_characters(rows):
-    """같은 이름의 캐릭터를 묶어서 [(이름, [이미지 주소, ...], 섹션 번호), ...] (나온 순서 유지)"""
+    """
+    같은 이름의 캐릭터를 묶어서 [(이름, [이미지 주소, ...], 섹션 번호), ...] (캐릭터는 나온 순서 유지)
+
+    한 캐릭터의 이미지(폼)는 ID의 (유닛번호, 폼번호) 순으로 정렬한다.
+    나무위키에는 폼이 뒤섞여 적힌 캐릭터가 있어서(예: 페가사 734-1, 734-2, 735-1, 734-3, 876-1)
+    나온 순서 그대로 쓰면 "N번째 이미지 = N진"이 맞지 않는다.
+    """
     grouped = {}
 
-    for name, _char_id, tag, section in rows:
+    for name, char_id, tag, section in rows:
         match = IMG_SRC_PATTERN.search(tag)
 
         if not match:
             continue
 
-        urls, _ = grouped.setdefault(name, ([], section))
-        urls.append(match.group(1))
+        forms, _ = grouped.setdefault(name, ([], section))
+        forms.append((id_key(char_id), match.group(1)))
 
-    return [(name, urls, section) for name, (urls, section) in grouped.items()]
+    return [
+        (name, [url for _key, url in sorted(forms, key=lambda form: form[0])], section)
+        for name, (forms, section) in grouped.items()
+    ]
 
 
 def section_key(text):
