@@ -89,6 +89,27 @@
     width: 64px;
     height: auto;
   }
+  main.wide {
+    max-width: 1100px;
+  }
+  .pairs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr));
+    gap: 12px;
+  }
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 6px;
+    background: #15181e;
+    border-radius: 12px;
+  }
+  @media (max-width: 560px) {
+    .pair {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 </head>
 <body>

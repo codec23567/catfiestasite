@@ -44,6 +44,10 @@ PAGES = [
     ("collaboration", "콜라보", []),
 ]
 
+# 섹션 번호로 캐릭터를 짝지어 나란히 놓는 페이지
+# (고축: 나무위키의 2.1.1 요수 가오 <-> 3.1.1 흑수 가오우 처럼 최상위 번호를 뺀 나머지가 같으면 짝)
+PAIRED_PAGES = {"cat_fiesta"}
+
 # ============================================================
 # 결과 읽기
 # ============================================================
@@ -52,7 +56,7 @@ IMG_SRC_PATTERN = re.compile(r'<img\s+src="([^"]+)"')
 
 
 def load_from_txt(path):
-    """결과 txt -> {시리즈 이름: [(캐릭터 이름, ID, img 태그), ...]}"""
+    """결과 txt -> {시리즈 이름: [(캐릭터 이름, ID, img 태그, 섹션 번호), ...]}"""
     series = {}
     current = None
 
@@ -69,8 +73,11 @@ def load_from_txt(path):
                 series[current] = []
                 continue
 
-            name, char_id, tag = line.split(" : ", 2)
-            series[current].append((name, char_id, tag))
+            # 이름 : ID : img 태그 [: 섹션 번호]  (섹션 번호가 없는 예전 결과도 읽는다)
+            parts = line.split(" : ")
+            name, char_id, tag = parts[0], parts[1], parts[2]
+            section = parts[3] if len(parts) > 3 else ""
+            series[current].append((name, char_id, tag, section))
 
     return series
 
@@ -231,6 +238,27 @@ CATEGORY_CSS = f"""  body {{
   .forms img {{
     width: 64px;
     height: auto;
+  }}
+  main.wide {{
+    max-width: 1100px;
+  }}
+  .pairs {{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr));
+    gap: 12px;
+  }}
+  .pair {{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 6px;
+    background: #15181e;
+    border-radius: 12px;
+  }}
+  @media (max-width: 560px) {{
+    .pair {{
+      grid-template-columns: 1fr;
+    }}
   }}"""
 
 
@@ -278,39 +306,103 @@ def build_index():
 
 
 def group_characters(rows):
-    """같은 이름의 캐릭터를 묶어서 [(이름, [이미지 주소, ...]), ...] (나온 순서 유지)"""
+    """같은 이름의 캐릭터를 묶어서 [(이름, [이미지 주소, ...], 섹션 번호), ...] (나온 순서 유지)"""
     grouped = {}
 
-    for name, _char_id, tag in rows:
+    for name, _char_id, tag, section in rows:
         match = IMG_SRC_PATTERN.search(tag)
 
         if not match:
             continue
 
-        grouped.setdefault(name, []).append(match.group(1))
+        urls, _ = grouped.setdefault(name, ([], section))
+        urls.append(match.group(1))
 
-    return list(grouped.items())
+    return [(name, urls, section) for name, (urls, section) in grouped.items()]
 
 
-def render_characters(rows):
-    cards = []
+def section_key(text):
+    return [int(part) for part in text.split(".")]
 
-    for name, urls in group_characters(rows):
-        imgs = "\n".join(
-            f'        <img src="{esc(url)}" alt="{esc(name)}" loading="lazy">'
-            for url in urls
-        )
-        cards.append(
-            f'    <div class="card">\n'
-            f'      <div class="name">{esc(name)}</div>\n'
-            f'      <div class="forms">\n{imgs}\n      </div>\n'
-            f'    </div>'
-        )
+
+def pair_characters(characters):
+    """
+    섹션 번호로 짝을 맞춘다.
+    최상위 번호가 다른 두 묶음(예: 2.1.1 과 3.1.1)에서 최상위 번호를 뺀 나머지(1.1)가
+    같은 캐릭터끼리 짝이다. -> [(왼쪽 캐릭터 또는 None, 오른쪽 캐릭터 또는 None), ...]
+    묶음이 정확히 둘이 아니거나 섹션 번호가 없으면 None.
+    """
+    by_top = {}
+
+    for name, urls, section in characters:
+        if not section:
+            return None
+
+        top, _, rest = section.partition(".")
+        by_top.setdefault(top, {})[rest] = (name, urls)
+
+    if len(by_top) != 2:
+        return None
+
+    left_top, right_top = sorted(by_top, key=int)
+    left, right = by_top[left_top], by_top[right_top]
+
+    rows = []
+
+    for rest in sorted(set(left) | set(right), key=section_key):
+        left_side, right_side = left.get(rest), right.get(rest)
+        rows.append((left_side, right_side))
+
+        if left_side is None:
+            print(f"[경고] {left_top}.{rest} 에 대응하는 캐릭터가 없어 "
+                  f"'{right_side[0]}'({right_top}.{rest})을 짝 없이 표시합니다")
+        elif right_side is None:
+            print(f"[경고] {right_top}.{rest} 에 대응하는 캐릭터가 없어 "
+                  f"'{left_side[0]}'({left_top}.{rest})을 짝 없이 표시합니다")
+
+    return rows
+
+
+def render_card(name, urls, indent="    "):
+    imgs = "\n".join(
+        f'{indent}    <img src="{esc(url)}" alt="{esc(name)}" loading="lazy">'
+        for url in urls
+    )
+
+    return (
+        f'{indent}<div class="card">\n'
+        f'{indent}  <div class="name">{esc(name)}</div>\n'
+        f'{indent}  <div class="forms">\n{imgs}\n{indent}  </div>\n'
+        f'{indent}</div>'
+    )
+
+
+def render_characters(rows, paired=False):
+    characters = group_characters(rows)
+
+    if paired:
+        pair_rows = pair_characters(characters)
+
+        if pair_rows is None:
+            print("[경고] 섹션 번호로 짝을 맞추지 못해 일반 배치로 표시합니다")
+        else:
+            units = []
+
+            for left_side, right_side in pair_rows:
+                slots = [
+                    render_card(*side, "      ") if side else '      <div class="slot"></div>'
+                    for side in (left_side, right_side)
+                ]
+                units.append('    <div class="pair">\n' + "\n".join(slots) + "\n    </div>")
+
+            return '  <div class="pairs">\n' + "\n".join(units) + "\n  </div>"
+
+    cards = [render_card(name, urls) for name, urls, _section in characters]
 
     return '  <div class="chars">\n' + "\n".join(cards) + "\n  </div>"
 
 
-def build_category(label, groups, series):
+def build_category(label, groups, series, paired=False):
     sections = []
 
     for subtitle, series_name in groups:
@@ -321,10 +413,11 @@ def build_category(label, groups, series):
             continue
 
         heading = f"  <h2>{esc(subtitle)}</h2>\n" if subtitle else ""
-        sections.append(heading + render_characters(rows))
+        sections.append(heading + render_characters(rows, paired))
 
     if sections:
-        main = '<main>\n' + "\n\n".join(sections) + "\n</main>"
+        main_class = ' class="wide"' if paired else ""
+        main = f'<main{main_class}>\n' + "\n\n".join(sections) + "\n</main>"
     else:
         main = f"""<main class="empty">
   <p>"{esc(label)}" 카테고리 목록이 여기에 들어갈 예정입니다.</p>
@@ -357,7 +450,10 @@ def main():
     write("index.html", build_index())
 
     for slug, label, groups in PAGES:
-        write(f"categories/{slug}.html", build_category(label, groups, series))
+        write(
+            f"categories/{slug}.html",
+            build_category(label, groups, series, paired=slug in PAIRED_PAGES),
+        )
 
     used = {name for _, _, groups in PAGES for _, name in groups}
     for name in series:

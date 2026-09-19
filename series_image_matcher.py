@@ -267,6 +267,7 @@ def extract_character_ids(source):
             records.append({
                 "character_name": name,
                 "id": link["id"],
+                "section": section,
             })
 
         print(f"[매칭] {section}. {name} → {len(seen_ids)}개 ID")
@@ -392,7 +393,7 @@ def process_series(url, image_index):
 
     for record in extract_character_ids(source):
         tag = match_id_to_tag(record["id"], image_index)
-        rows.append((record["character_name"], record["id"], tag))
+        rows.append((record["character_name"], record["id"], tag, record["section"]))
 
     return series_name, rows
 
@@ -402,9 +403,9 @@ def save_results(all_series):
         for series_name, rows in all_series:
             f.write(f"[{series_name}]\n")
 
-            for name, char_id, tag in rows:
+            for name, char_id, tag, section in rows:
                 tag_text = tag if tag else "이미지 없음"
-                f.write(f"{name} : {char_id} : {tag_text}\n")
+                f.write(f"{name} : {char_id} : {tag_text} : {section}\n")
 
             f.write("\n")
 
