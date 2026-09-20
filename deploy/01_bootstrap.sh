@@ -19,8 +19,8 @@
 set -euo pipefail
 
 # ---- 설정 (환경변수로 바꿀 수 있음) -----------------------------------
-ADMIN_USER="${ADMIN_USER:-}"                 # 로그인용 일반 계정 (필수)
-ADMIN_SSH_PUBKEY="${ADMIN_SSH_PUBKEY:-}"     # 그 계정의 SSH 공개키 한 줄 (필수)
+ADMIN_USER="${ADMIN_USER:-}"                 # 로그인용 일반 계정 (선택. 둘 다 비우면 root 비밀번호 로그인 그대로 사용)
+ADMIN_SSH_PUBKEY="${ADMIN_SSH_PUBKEY:-}"     # 그 계정의 SSH 공개키 한 줄 (ADMIN_USER 와 함께 넣거나 둘 다 비우기)
 REPO_URL="${REPO_URL:-https://github.com/codec23567/catfiestagitsheet235.git}"
 REPO_DIR="${REPO_DIR:-/root/catfiestagitsheet235}"   # webhook.py 가 이 위치를 기준으로 동작
 VENV_DIR="${VENV_DIR:-/root/myproject/venv}"         # webhook.py 97행에 이 경로가 고정되어 있음
@@ -68,15 +68,20 @@ write_file() {  # write_file <경로> <권한> ; 내용은 표준입력으로 �
 # ---- 시작 전 검사 ------------------------------------------------------
 [ "$DRY_RUN" = 1 ] || [ "$(id -u)" = 0 ] || die "root 로 실행하세요 (sudo -i 후 다시)"
 
-[ -n "$ADMIN_USER" ] && [ -n "$ADMIN_SSH_PUBKEY" ] || die \
-"ADMIN_USER 와 ADMIN_SSH_PUBKEY 가 필요합니다.
-    이 둘 없이 진행하면 나중에 SSH 비밀번호 로그인을 끌 때 서버에 못 들어올 수 있어 막아 두었습니다.
+# ADMIN_USER 와 ADMIN_SSH_PUBKEY 는 둘 다 넣거나 둘 다 비워야 한다.
+# 둘 다 비우면 관리자 계정을 만들지 않고, root 비밀번호 로그인을 그대로 쓴다 (02_harden_ssh.sh 는 쓰지 않는다).
+if [ -n "$ADMIN_USER" ] || [ -n "$ADMIN_SSH_PUBKEY" ]; then
+  [ -n "$ADMIN_USER" ] && [ -n "$ADMIN_SSH_PUBKEY" ] || die \
+"ADMIN_USER 와 ADMIN_SSH_PUBKEY 는 함께 넣어야 합니다 (둘 다 비우면 비밀번호 방식으로 진행).
     예) ADMIN_USER=myname ADMIN_SSH_PUBKEY=\"\$(cat ~/.ssh/id_ed25519.pub)\" bash 01_bootstrap.sh"
 
-[[ "$ADMIN_USER" =~ ^[a-z][a-z0-9_-]{0,30}$ ]] || die "ADMIN_USER 형식이 올바르지 않습니다 (소문자로 시작, 영문 소문자/숫자/_/-)"
-[ "$ADMIN_USER" != root ] || die "ADMIN_USER 는 root 가 아닌 다른 이름이어야 합니다"
-[[ "$ADMIN_SSH_PUBKEY" =~ ^(ssh-ed25519|ssh-rsa|ecdsa-sha2-nistp[0-9]+|sk-ssh-ed25519@openssh.com)\  ]] \
-  || die "ADMIN_SSH_PUBKEY 가 공개키 형식이 아닙니다 (ssh-ed25519 AAAA... 처럼 시작해야 함)"
+  [[ "$ADMIN_USER" =~ ^[a-z][a-z0-9_-]{0,30}$ ]] || die "ADMIN_USER 형식이 올바르지 않습니다 (소문자로 시작, 영문 소문자/숫자/_/-)"
+  [ "$ADMIN_USER" != root ] || die "ADMIN_USER 는 root 가 아닌 다른 이름이어야 합니다"
+  [[ "$ADMIN_SSH_PUBKEY" =~ ^(ssh-ed25519|ssh-rsa|ecdsa-sha2-nistp[0-9]+|sk-ssh-ed25519@openssh.com)\  ]] \
+    || die "ADMIN_SSH_PUBKEY 가 공개키 형식이 아닙니다 (ssh-ed25519 AAAA... 처럼 시작해야 함)"
+else
+  warn "ADMIN_USER/ADMIN_SSH_PUBKEY 가 없어서 비밀번호 방식으로 진행합니다. root 비밀번호를 길고 복잡하게 쓰세요 (.env 와 서비스 계정 키가 이 서버에 들어갑니다)"
+fi
 [ -f "$SCRIPT_DIR/requirements-server.txt" ] || die "$SCRIPT_DIR/requirements-server.txt 가 없습니다 (이 스크립트와 같은 폴더에 두세요)"
 
 [ "$DRY_RUN" = 1 ] && warn "DRY_RUN: 아무것도 바꾸지 않고 할 일만 출력합니다"
@@ -109,7 +114,10 @@ else
 fi
 
 # ---- 3. 관리자 계정 + SSH 키 -------------------------------------------
-log "3/9 관리자 계정 ($ADMIN_USER)과 SSH 키"
+log "3/9 관리자 계정 (${ADMIN_USER:-만들지 않음})과 SSH 키"
+if [ -z "$ADMIN_USER" ]; then
+echo "ADMIN_USER 가 없어서 건너뜁니다 (root 비밀번호 로그인 유지)"
+else
 if id "$ADMIN_USER" >/dev/null 2>&1; then
   echo "계정이 이미 있습니다"
 else
@@ -136,6 +144,7 @@ else
   visudo -cf "$tmp_sudoers" >/dev/null || die "sudoers 문법 오류"
   install -m 440 "$tmp_sudoers" "/etc/sudoers.d/90-$ADMIN_USER"
   rm -f "$tmp_sudoers"
+fi
 fi
 
 # ---- 4. 방화벽 ---------------------------------------------------------
@@ -244,6 +253,19 @@ fi
 
 # ---- 끝 ----------------------------------------------------------------
 log "초기 세팅 완료"
+if [ -z "$ADMIN_USER" ]; then
+cat <<EOF
+비밀번호 방식으로 진행했습니다 (관리자 계정 없음, SSH 는 그대로).
+다음 순서로 진행하세요.
+
+ 1) .env / credentials.json 을 $REPO_DIR 에 넣고 webhook 시작 (README.md 3~4단계 참고)
+ 2) Apps Script 의 웹훅 주소를 새 서버로 변경하고 전환 테스트 (README.md 5·7단계 참고)
+
+ * 02_harden_ssh.sh 는 실행하지 마세요 (관리자 계정이 없어서 실행할 수 없습니다).
+ * root 비밀번호는 길고 복잡하게 유지하세요. fail2ban 이 반복 실패를 차단합니다.
+EOF
+exit 0
+fi
 cat <<EOF
 다음 순서로 진행하세요.
 

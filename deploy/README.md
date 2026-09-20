@@ -56,11 +56,14 @@ DRY_RUN=1 ADMIN_USER=내이름 ADMIN_SSH_PUBKEY="ssh-ed25519 AAAA... me@pc" bash
 ADMIN_USER=내이름 ADMIN_SSH_PUBKEY="ssh-ed25519 AAAA... me@pc" bash 01_bootstrap.sh
 ```
 
+- **SSH 키 없이 root 비밀번호로 쓰려면** `ADMIN_USER` 와 `ADMIN_SSH_PUBKEY` 를 둘 다 빼고 `bash 01_bootstrap.sh` 만 실행하세요. 관리자 계정을 만들지 않고 SSH 는 그대로 둡니다(이 경우 2단계는 건너뜀). `.env` 와 서비스 계정 키가 이 서버에 들어가므로 root 비밀번호를 길고 복잡하게 쓰세요. 둘 중 하나만 넣으면 오류가 납니다.
 - 이 폴더는 `catfiestasite` 저장소에 있습니다. 웹훅 서버가 실제로 쓰는 `catfiestagitsheet235` 저장소는 `01_bootstrap.sh` 가 `/root/catfiestagitsheet235` 에 알아서 clone 합니다.
 - [ ] 실행이 끝까지 됐는지 확인 (`[오류]` 가 없어야 함)
 - [ ] `.env`, `credentials.json` 이 아직 없어서 webhook 은 시작되지 않은 것이 정상
 
 ## 2. SSH 강화 (반드시 이 순서)
+
+> 1단계를 비밀번호 방식(관리자 계정 없음)으로 했다면 이 단계는 **건너뛰고** 3단계로 가세요.
 
 - [ ] **새 터미널**에서 `ssh 내이름@<새IP>` 로 키 접속 확인
 - [ ] 그 터미널에서 `sudo -n true && echo OK` 확인
