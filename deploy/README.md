@@ -9,7 +9,7 @@
 | `01_bootstrap.sh` | 초기 세팅 전체 (root 로 실행) |
 | `requirements-server.txt` | 서버용 Python 패키지 목록 (버전 고정) |
 | `CLAUDE.md` | 서버에서 Claude Code 로 진행할 때의 규칙과 배경 (아래 "Claude Code 로 진행하기") |
-| `02_harden_ssh.sh` | 사용하지 않음. 나중에 SSH 키 로그인으로 바꾸고 싶을 때만 참고 |
+| `02_harden_ssh.sh` | **보안 관련 정보는 전부 여기**(상단 주석) + SSH 강화 스크립트. 평소엔 쓰지 않고, 보안이 걱정될 때 읽기 |
 
 > 비밀 값(`.env`, `credentials.json`)은 이 저장소에 없습니다. 아래 2단계에서 따로 만들거나 옮깁니다.
 > GitHub 웹에서 만든 파일은 실행 권한이 없으므로 **항상 `bash 파일명`** 으로 실행하세요.
@@ -217,12 +217,10 @@ git -C /root/catfiestasite config user.email 내_GitHub_이메일
 
 ## 나중에 필요해지면
 
-- **HTTPS**: 도메인 → 새 IP 연결 후 nginx + certbot. 이때 5000 포트는 외부에서 닫고 443 만 열기 (`ufw delete allow 5000/tcp`, `ufw allow 443/tcp`)
+- 보안(HTTPS, 전용 계정, SSH 키 로그인 전환, 침입 의심 시 점검·교체 등)은 `02_harden_ssh.sh` 상단 주석을 보세요.
 - **gunicorn**: `pip install gunicorn` 후 서비스 `ExecStart` 를
   `.../venv/bin/gunicorn --workers 1 --threads 8 --timeout 180 --bind 0.0.0.0:5000 webhook:app`
   워커는 반드시 **1개**여야 함 (`running_jobs` 중복 실행 방지가 프로세스 메모리에 있음)
-- 웹훅을 root 가 아닌 전용 계정으로 실행 (`webhook.py` 97행의 `/root/myproject/venv/bin/python3` 경로를 `sys.executable` 등으로 바꿔야 함)
-- SSH 를 키 로그인으로 바꾸기: `01_bootstrap.sh` 에 `ADMIN_USER`, `ADMIN_SSH_PUBKEY` 를 넣어 실행하고 `02_harden_ssh.sh` 사용 (스크립트 상단 설명 참고)
 - 완료 후 VM **스냅샷** 만들어 두기
 
 ## 직접 만들 때 자주 틀리는 곳
