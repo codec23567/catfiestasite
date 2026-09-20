@@ -88,8 +88,10 @@ log "1/9 패키지 업데이트와 설치"
 export DEBIAN_FRONTEND=noninteractive
 run apt-get update -y
 run apt-get upgrade -y
+# python3-dev, build-essential: pip 가 C 확장 패키지를 직접 컴파일해야 할 때 필요하다 (미리 넣어 두는 보험)
 run apt-get install -y ufw fail2ban git curl ca-certificates gnupg \
-    python3-venv python3-pip tzdata unattended-upgrades logrotate
+    python3 python3-venv python3-pip python3-dev build-essential \
+    tzdata unattended-upgrades logrotate
 
 # ---- 2. 스왑 -----------------------------------------------------------
 log "2/9 스왑"
