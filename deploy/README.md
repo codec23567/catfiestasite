@@ -8,6 +8,7 @@
 | `01_bootstrap.sh` | 초기 세팅 전체 (root 로 실행) |
 | `02_harden_ssh.sh` | SSH 비밀번호/root 로그인 차단 (키 접속 확인 후 실행) |
 | `requirements-server.txt` | 서버용 Python 패키지 목록 (버전 고정) |
+| `CLAUDE.md` | 서버에서 Claude Code 로 진행할 때의 규칙과 배경 (아래 "Claude Code 로 진행하기") |
 
 > 비밀 값(`.env`, `credentials.json`)은 이 저장소에 없습니다. 아래 3단계에서 따로 만들거나 옮깁니다.
 > GitHub 웹에서 만든 파일은 실행 권한이 없으므로 **항상 `bash 파일명`** 으로 실행하세요.
@@ -256,3 +257,33 @@ git -C /root/catfiestasite remote set-url --push origin git@github-catfiestasite
 - 타임존은 현재 서버처럼 **UTC** 그대로 둡니다 (`zoneinfo` 를 쓰는 스크립트가 있으니, 필요하면 확인 후 변경)
 - Python 은 현재 서버 3.14.4 기준으로 만든 `requirements-server.txt` 를 씁니다. 새 서버의 기본 Python 버전이 다르면 일부 패키지가 안 깔릴 수 있음 (그때는 `pip freeze` 대신 최상위 패키지만 쓰기)
 - GitHub Actions 는 GitHub 에서 돌기 때문에 이전과 무관합니다 (`GOOGLE_CREDENTIALS` 시크릿만 서비스 계정 키와 맞춰 두면 됩니다)
+
+## Claude Code 로 진행하기 (선택)
+
+새 서버에 Claude Code 를 설치해서 이 가이드를 대신 실행하게 할 수 있습니다.
+같은 폴더의 `CLAUDE.md` 가 규칙(하면 안 되는 일)과 배경(시스템 구조, 알려진 함정)을 알려 줍니다.
+설치와 로그인 방법은 Claude Code 공식 문서를 확인하세요.
+
+```bash
+cd /root/catfiestasite/deploy
+claude
+```
+
+예시 요청:
+
+```
+이 서버는 새로 만든 Ubuntu VM 입니다. deploy/README.md 를 읽고 1~4단계를 진행해 주세요.
+- 각 단계를 실행하기 전에 무엇을 할지 먼저 알려 주세요.
+- 01_bootstrap.sh 는 DRY_RUN=1 로 먼저 확인한 뒤 실제로 실행해 주세요.
+- 02_harden_ssh.sh 는 제가 새 터미널에서 키 접속을 확인했다고 말하기 전에는 절대 실행하지 마세요.
+- .env 와 credentials.json 은 제가 직접 넣을 테니 내용을 읽거나 출력하지 마세요.
+- 웹훅은 잘못된 토큰으로 401 이 오는지까지만 테스트해 주세요 (실제 작업은 실행 금지).
+```
+
+**주의**
+
+- 서버 안에서 실행되므로 **그 서버의 셸 권한을 갖습니다.** 관리자 계정으로 실행하고 필요한 명령만 `sudo` 로 하세요. 권한 요청을 **자동 승인하지 말고**, 방화벽과 SSH 설정은 내용을 확인한 뒤 승인하세요.
+- **비밀 값을 대화에 붙여넣지 마세요.** 대화는 기록으로 남습니다. `nano` 나 `scp` 로 직접 넣으세요.
+- 작업이 끝나면 **로그아웃하거나 API 키를 삭제**하세요.
+- 새 Claude Code 는 이전 대화를 기억하지 못합니다. 이 폴더의 파일이 유일한 정보입니다.
+- 사람이 직접 해야 하는 일: VM 생성, 서비스 계정 키 발급, GitHub 배포 키 등록, Apps Script 수정, **새 터미널에서 키 접속 확인**.
