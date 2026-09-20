@@ -258,8 +258,8 @@ cat <<EOF
 비밀번호 방식으로 진행했습니다 (관리자 계정 없음, SSH 는 그대로).
 다음 순서로 진행하세요.
 
- 1) .env / credentials.json 을 $REPO_DIR 에 넣고 webhook 시작 (README.md 3~4단계 참고)
- 2) Apps Script 의 웹훅 주소를 새 서버로 변경하고 전환 테스트 (README.md 5·7단계 참고)
+ 1) .env / credentials.json 을 $REPO_DIR 에 넣고 webhook 시작 (README.md 2~3단계 참고)
+ 2) Apps Script 의 웹훅 주소를 새 서버로 변경하고 전환 테스트 (README.md 4·5단계 참고)
 
  * 02_harden_ssh.sh 는 실행하지 마세요 (관리자 계정이 없어서 실행할 수 없습니다).
  * root 비밀번호는 길고 복잡하게 유지하세요. fail2ban 이 반복 실패를 차단합니다.
