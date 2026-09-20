@@ -27,7 +27,7 @@
 |---|---|
 | 시스템 패키지 (apt) | `python3`, `python3-venv`, `python3-pip`, `python3-dev`, `build-essential`, `git`, `curl`, `ca-certificates`, `gnupg`, `ufw`, `fail2ban`, `tzdata`, `unattended-upgrades`, `logrotate` |
 | Google Chrome | 공식 `.deb` 설치 (amd64 만 지원). `modify_*` 스크립트의 selenium 이 사용 |
-| Python 패키지 | `requirements-server.txt` 37개: `selenium`, `requests`, `beautifulsoup4`, `gspread`, `google-auth`, `Flask` 등 |
+| Python 패키지 | `requirements-server.txt` 6개: `Flask`, `gspread`, `selenium`, `requests`, `beautifulsoup4`, `python-dotenv` (하위 의존성은 pip 이 자동 설치) |
 | 설정 | 관리자 계정+SSH 키, 방화벽(22·5000), fail2ban, 스왑(RAM 3GB 미만일 때), venv, 저장소 clone, `webhook.service`(부팅 시 자동 시작), 로그 회전 |
 
 - **chromedriver 는 따로 설치하지 않습니다.** selenium 이 처음 실행할 때 알아서 받으므로, **서버가 인터넷에 연결되어 있어야** 하고 첫 실행은 조금 느릴 수 있습니다.
@@ -255,7 +255,7 @@ git -C /root/catfiestasite remote set-url --push origin git@github-catfiestasite
 ## 참고: 현재 서버와 다른 점 / 주의
 
 - 타임존은 현재 서버처럼 **UTC** 그대로 둡니다 (`zoneinfo` 를 쓰는 스크립트가 있으니, 필요하면 확인 후 변경)
-- Python 은 현재 서버 3.14.4 기준으로 만든 `requirements-server.txt` 를 씁니다. 새 서버의 기본 Python 버전이 다르면 일부 패키지가 안 깔릴 수 있음 (그때는 `pip freeze` 대신 최상위 패키지만 쓰기)
+- Python 은 현재 서버 3.14.4 기준으로 만든 `requirements-server.txt` 를 씁니다. 새 서버의 기본 Python 버전이 다르면 일부 패키지가 안 깔릴 수 있음 (그때는 `==` 버전 고정을 풀기)
 - GitHub Actions 는 GitHub 에서 돌기 때문에 이전과 무관합니다 (`GOOGLE_CREDENTIALS` 시크릿만 서비스 계정 키와 맞춰 두면 됩니다)
 
 ## Claude Code 로 진행하기 (선택)
