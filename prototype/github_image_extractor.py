@@ -1,3 +1,4 @@
+# 사용 안 함: series_image_matcher.py 로 통합됨
 import os
 import re
 import time

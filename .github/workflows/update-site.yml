@@ -1,3 +1,5 @@
+# 현재 작동 안 함: 나무위키가 GitHub Actions 러너 IP를 403으로 차단해서
+# build_site.py 크롤링이 항상 빈 결과로 끝남 (변경사항 없음 -> 커밋 안 됨)
 name: Update Site
 
 on:
